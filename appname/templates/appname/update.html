@@ -1,0 +1,28 @@
+{% extends 'appname/base.html' %}
+
+{% block header %}
+<header class="masthead text-center text-white">
+  <div class="masthead-content">
+    <div class="container">
+      <h1 class="masthead-heading mb-0">Jinstagram</h1>
+      
+      <a href="/create" class="btn btn-primary btn-xl rounded-pill mt-5">Write a Post</a>
+    </div>
+  </div>
+  <div class="bg-circle-1 bg-circle"></div>
+  <div class="bg-circle-2 bg-circle"></div>
+  <div class="bg-circle-3 bg-circle"></div>
+  <div class="bg-circle-4 bg-circle"></div>
+</header>
+{%  endblock %}
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table}}
+    </table>
+    <button type="submit" value="submit" onclick="return confirm('정말 수정할꺼니??')"></button>
+</form>
+
+{% endblock %}

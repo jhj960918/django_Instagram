@@ -1,0 +1,93 @@
+{% extends 'appname/base.html' %}
+{% load crispy_forms_tags %}
+{% load calc %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+
+    <div class="col-10 row-1 justify-content-left" style="position:fixed ; width : 100%;" >
+      <div class="col-md-3" >
+        <h1> mypage </h1>
+        <div class="thumbnail" style="border: 0.8em solid violet; ">
+          {% if user.profileimage %}
+          <img src="/media/{{user.profileimage}}" class="img-circle img-rounded"alt="..."width="60%"height="60%" >
+          {% else %}
+          <img src="/static/appname/img/kakao.png" alt="..."width="100%"height="100%" >
+          {% endif %}
+          <div class="caption" style="text-align: left;" >
+          
+            <p>아이디 :{{user.username}}</p>
+            <p>닉네임 : {{user.nickname}}</p>
+            <p>이메일 : {{user.email}}</p>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    {% for post in posts %}
+    {% if user == post.writer %}
+    <br>
+      <div class="col-10 row-1 justify-content-center" style="width: 100%;" >
+        <div class="col-md-3 thumbnail" style="text-align: left; border: 0.1em solid;width:40%;float:none;margin:0 auto">
+          <div class="row align-items-center">
+            <div class="col">
+              <br>
+              {% if post.writer.profileimage %}
+              <h4><img src="{{post.writer.profileimage.url}}" class="img-circle img-rounded" alt="..." width="15%"
+                  >
+                {{ post.writer}} &nbsp; {{post.create_date|time_since}}</h4>
+    
+              {% else %}
+              <h4 class="glyphicon glyphicon-user">{{ post.writer}} {{post.create_date|time_since}}</h4>
+              {% endif %}
+    
+             <br>
+              {% if post.image %}
+              <img  src="{{ post.image.url }}"class="img-circle img-rounded"  alt="" width="100%" height="100%">
+              {% endif %}
+              <p>{{post.content}}</p>
+              <span>
+                {% for hashtag in post.hashtags.all %}
+                <a href="/hashtag/{{ hashtag.name }}">
+                  #{{ hashtag.name }}
+                </a>
+                {% endfor %}
+              </span>
+              <br>
+              <div class="btn-group" style>
+                <a href="{% url 'update' post.id %}"><img src="/static/appname/img/update.png" alt="update" style="justify-content: left;"></a>
+                <a href="{% url 'delete' post.id %}" onclick="return confirm('정말 삭제하시겠습니까?')"><img src="/static/appname/img/delete.png" alt="delete" ></a>
+              </div>
+
+              <li>
+                <input type="image" class="like" name="{{ post.id }}" src="/static/appname/img/다운로드.png" width="30">
+                <p id="count-{{ post.id }}">좋아용 {{ post.like_count }}개</p>
+              </li>
+              
+              
+
+              <form method="POST" action="/comment/{{ post.id }}">
+                {% csrf_token %}
+                {{ comment_form |crispy}}
+                <input type="submit" value="댓글쓰기" class="btn btn-info" >
+              </form>
+              
+                {% for comment in post.comments.all %}
+                <tr>
+                  <p> {{ comment.c_writer }}의 댓글 : {{ comment.text }}</p>
+                </tr>
+                {% endfor %}
+              
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+{%endif%}
+{% endfor %}
+  
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'appname/base.html' %}
+
+{% block header %}
+<header class="masthead text-center text-white">
+    <div class="masthead-content">
+      <div class="container">
+        <h1 class="masthead-heading mb-0">진형준 SNS 회원가입</h1>
+      </div>
+    </div>
+    <div class="bg-circle-1 bg-circle"></div>
+    <div class="bg-circle-2 bg-circle"></div>
+    <div class="bg-circle-3 bg-circle"></div>
+    <div class="bg-circle-4 bg-circle"></div>
+  </header>
+{% endblock %}
+
+{% block content %}
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<form method="POST"  enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="submit">
+</form>
+{% endblock %}

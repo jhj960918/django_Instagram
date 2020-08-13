@@ -1,0 +1,94 @@
+<!doctype html>
+{% load static %}
+
+<html>
+
+<head>
+<style>
+   @font-face {
+    font-family: 'TmoneyRoundWindExtraBold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/TmoneyRoundWindExtraBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+</style>
+  
+  <!-- Bootstrap core CSS -->
+  
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+  <meta charset="utf-8">
+  <title>진형준 인스타그램</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+ <!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body style="font-family: TmoneyRoundWindExtraBold ;">
+  <nav class="navbar  fixed-top navbar-expand-lg navbar-dark  " style="background-color: blueviolet; ">
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+      <ul class="navbar-nav mr-auto" style="width: 80%;">
+        <li class="nav-item active">
+          <a class="nav-link  fab fa-instagram" href="{% url 'main' %}" style="font-size: medium;">Instagram </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link glyphicon glyphicon-plus" href="{% url 'create' %}" style="font-size:medium;" ></a>
+        </li>
+      
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle glyphicon glyphicon-user" href="#" style="font-size:medium;" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="background-color:  rgb(118, 98, 209);">
+            {% if user.is_authenticated %}     
+            <a  class="dropdown-item" href="{% url 'logout' %}" style="font-size: medium; ">Logout</a>
+            <a  class="dropdown-item" href="{% url 'mypage' %}" style="font-size: medium;  ">Mypage</a>
+          {% else %}
+            <a  class="dropdown-item" href="{% url 'signin' %}" style="font-size: medium;  ">Login</a>
+           <a class="dropdown-item" href="{% url 'signup' %}" style="font-size: medium;  ">Signup</a>
+          {% endif %}
+          </div>
+          
+        </li>
+       
+      </ul>
+  
+      <form class="form-inline my-4 my-lg-2" style="width: 100%;">
+        <input class="form-control mr-sm-3" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn  my-2 my-sm-0" type="submit" style="font-weight: bold; background-color: coral;">Search</button>
+      </form>
+    </div>
+  
+  </nav>
+      
+{% block header %}
+{% endblock %}
+  
+  {% block content %}
+  {% endblock %}
+
+  <!-- Footer -->
+  <footer class="container-fluid navbar-fixed-bottom int-footer" class="int-footer" style="background-color: blueviolet; ">
+    <div class="container">
+      <p class="m-0 text-center text-white medium">Likelion &copy; JHJ Instagram 2020</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+   <script src="{% static 'appname/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'appname/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'appname/js/jquery.js' %}"></script>
+  <script type="text/javascript" src="{% static 'appname/js/bootstrap.js' %}"></script>
+</body>
+
+</html>
