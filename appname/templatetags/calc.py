@@ -1,7 +1,7 @@
 from django import template
 
 from datetime import datetime, date, timedelta, timezone
-
+#템플릿 테그구현 글쓴 
 
 register = template.Library()
 
